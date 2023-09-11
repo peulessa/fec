@@ -1,6 +1,9 @@
 <template>
   <q-layout>
-    <q-card class="flex flex-column q-mx-auto" style="width: 60%">
+    <q-card
+      class="flex flex-column q-mx-auto"
+      style="width: 45%; margin-top: 5em; height: 600px"
+    >
       <q-card-section
         style="
           background-image: url('./src/assets/images/bg-sidebar-desktop.svg');
@@ -47,7 +50,7 @@
         </div>
       </q-card-section>
 
-      <q-card-section class="q-pa-xl">
+      <q-card-section>
         <router-view />
       </q-card-section>
     </q-card>

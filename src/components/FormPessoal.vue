@@ -1,9 +1,5 @@
 <template>
-  <div class="q-pb-md">
-    <h3 class="q-ma-none q-pb-md">Informações Pessoais</h3>
-    <p>Porfavor, insira seu nome, endereço de email e número de telefone.</p>
-  </div>
-  <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+  <q-form @submit="onSubmit" class="q-gutter-md">
     <q-input
       filled
       v-model="name"
@@ -24,9 +20,11 @@
     />
 
     <q-input
+      mask="(##) #####-####"
+      unmasked-value
       filled
       v-model="phone"
-      label="Ex. +55 77 99999-9999 *"
+      label="Ex. (77) 98888-9999 *"
       lazy-rules
       :rules="[
         (val) =>
@@ -34,15 +32,39 @@
       ]"
     />
 
-    <q-toggle v-model="accept" label="I accept the license and terms" />
+    <q-toggle v-model="accept" label="Aceito os termos de uso" />
 
-    <div>
-      <q-btn label="Submit" type="submit" color="primary" />
-      <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+    <div class="flex justify-end">
+      <q-btn label="Próximo" type="submit" color="primary" />
     </div>
   </q-form>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const $q = useQuasar();
+const accept = ref(false);
+const name = ref("");
+const email = ref("");
+const phone = ref("");
+
+function onSubmit() {
+  if (accept.value !== true) {
+    $q.notify({
+      color: "red-5",
+      textColor: "white",
+      icon: "warning",
+      message: "Você precisa aceitar os termos de uso primeiro",
+      position: "top",
+    });
+  } else {
+    router.push("/plano");
+  }
+}
+</script>
 
 <style scoped></style>
