@@ -43,7 +43,7 @@
     </div>
   </section>
 
-  <section class="flex justify-between q-mt-xl">
+  <section class="flex justify-between" style="margin-top: 10em">
     <q-btn color="transparent" text-color="primary" label="Voltar" />
     <q-btn color="primary" label="Próximo" />
   </section>

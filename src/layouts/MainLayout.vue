@@ -50,7 +50,7 @@
         </div>
       </q-card-section>
 
-      <q-card-section>
+      <q-card-section style="margin-top: 3em">
         <router-view />
       </q-card-section>
     </q-card>
