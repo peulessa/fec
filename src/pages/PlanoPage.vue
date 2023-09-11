@@ -58,8 +58,9 @@ const value = ref("true");
 <style scoped>
 .plan-card {
   border: 1px solid grey;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 1em;
   padding-right: 4em;
+  cursor: pointer;
 }
 </style>
