@@ -6,53 +6,108 @@
     </p>
   </section>
 
-  <section class="flex justify-between">
-    <div class="plan-card">
-      <img src="../assets/images/icon-arcade.svg" alt="ícone do Plano Arcade" />
-      <div class="q-mt-lg">
-        <strong>Arcade</strong>
-        <p>R$10/mês</p>
-      </div>
-    </div>
+  <section>
+    <q-list class="flex justify-around">
+      <q-item class="plan-card" clickable v-ripple>
+        <q-item-section>
+          <img
+            src="../assets/images/icon-arcade.svg"
+            alt="ícone do Plano Arcade"
+          />
+        </q-item-section>
 
-    <div class="plan-card q-mx-lg">
-      <img
-        src="../assets/images/icon-advanced.svg"
-        alt="ícone do Plano Advanced"
-      />
-      <div class="q-mt-lg">
-        <strong>Advanced</strong>
-        <p>R$12/mês</p>
-      </div>
-    </div>
+        <q-item-label class="q-mt-lg" style="font-weight: bold"
+          >Arcade</q-item-label
+        >
+        <q-item-label caption>{{ arcadePrice }}</q-item-label>
+      </q-item>
 
-    <div class="plan-card">
-      <img src="../assets/images/icon-pro.svg" alt="ícone do Plano Pro" />
-      <div class="q-mt-lg">
-        <strong>Pro</strong>
-        <p>R$14/mês</p>
-      </div>
-    </div>
+      <q-item class="plan-card" clickable v-ripple>
+        <q-item-section>
+          <img
+            src="../assets/images/icon-advanced.svg"
+            alt="ícone do Plano Advanced"
+          />
+        </q-item-section>
+
+        <q-item-label class="q-mt-lg" style="font-weight: bold"
+          >Advanced</q-item-label
+        >
+        <q-item-label caption>{{ advancedPrice }}</q-item-label>
+      </q-item>
+
+      <q-item class="plan-card" clickable v-ripple>
+        <q-item-section>
+          <img src="../assets/images/icon-pro.svg" alt="ícone do Plano Pro" />
+        </q-item-section>
+
+        <q-item-label class="q-mt-lg" style="font-weight: bold"
+          >Pro</q-item-label
+        >
+        <q-item-label caption>{{ proPrice }}</q-item-label>
+      </q-item>
+    </q-list>
   </section>
 
   <section style="background-color: rgb(230, 230, 230); border-radius: 10px">
-    <div style="margin-top: 2em; text-align: center">
+    <div style="margin-top: 3em; text-align: center">
       <strong>Mensal</strong>
-      <q-toggle v-model="value" color="primary" keep-color size="lg" />
+      <q-toggle
+        v-model="value"
+        color="primary"
+        keep-color
+        size="lg"
+        @update:model-value="choicePlan"
+      />
       <strong>Anual</strong>
     </div>
   </section>
 
-  <section class="flex justify-between" style="margin-top: 10em">
-    <q-btn color="transparent" text-color="primary" label="Voltar" />
-    <q-btn color="primary" label="Próximo" />
+  <section class="flex justify-between" style="padding-top: 11em">
+    <q-btn
+      @click="back"
+      color="transparent"
+      text-color="primary"
+      label="Voltar"
+    />
+    <q-btn @click="next" color="primary" label="Próximo" />
   </section>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const value = ref("true");
+const value = ref(false);
+const router = useRouter();
+let arcadePrice = ref("");
+let advancedPrice = ref();
+let proPrice = ref();
+
+function choicePlan() {
+  if (value.value === true) {
+    arcadePrice.value = "R$100/Ano";
+    advancedPrice.value = "R$120/Ano";
+    proPrice.value = "R$150/Ano";
+
+    storage.setItem(plan, "anual");
+  } else {
+    arcadePrice.value = "R$10/Mês";
+    advancedPrice.value = "R$12/Mês";
+    proPrice.value = "R$15/Mês";
+
+    storage.setItem(plan, "mensal");
+  }
+}
+choicePlan();
+
+function next() {
+  router.push("/servicos");
+}
+
+function back() {
+  router.push("/");
+}
 </script>
 
 <style scoped>
@@ -60,7 +115,9 @@ const value = ref("true");
   border: 1px solid grey;
   border-radius: 10px;
   padding: 1em;
-  padding-right: 4em;
-  cursor: pointer;
+  padding-right: 5em;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
 }
 </style>

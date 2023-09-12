@@ -1,4 +1,11 @@
 <template>
+  <section class="q-pb-md">
+    <h4 class="q-ma-none q-pb-md">Informações Pessoais</h4>
+    <p style="font-weight: 250">
+      Porfavor, insira seu nome, endereço de email e número de telefone.
+    </p>
+  </section>
+
   <q-form @submit="onSubmit" class="q-gutter-md">
     <q-input
       filled
@@ -34,7 +41,7 @@
 
     <q-toggle v-model="accept" label="Aceito os termos de uso" />
 
-    <div class="flex justify-end">
+    <div class="flex justify-end" style="margin-top: 4.3em">
       <q-btn label="Próximo" type="submit" color="primary" />
     </div>
   </q-form>

@@ -2,7 +2,7 @@
   <q-layout>
     <q-card
       class="flex flex-column q-mx-auto"
-      style="width: 45%; margin-top: 5em; height: 600px"
+      style="max-width: max-content; margin-top: 5em; height: 600px"
     >
       <q-card-section
         style="
@@ -11,6 +11,7 @@
           margin: 1em;
           padding: 2em;
           padding-right: 5em;
+          max-width: fit-content;
         "
       >
         <div class="flex q-mb-lg">
@@ -50,7 +51,7 @@
         </div>
       </q-card-section>
 
-      <q-card-section style="margin-top: 3em">
+      <q-card-section style="margin-top: 3em; width: 28vw">
         <router-view />
       </q-card-section>
     </q-card>

@@ -1,0 +1,96 @@
+<template>
+  <section class="q-pb-md">
+    <h4 class="q-ma-none q-pb-md">Serviços Adicionais</h4>
+    <p style="font-weight: 250">Melhore sua experiência de jogo.</p>
+  </section>
+
+  <section>
+    <div>
+      <q-list>
+        <q-item class="item" tag="label" v-ripple>
+          <q-item-section avatar top>
+            <q-checkbox v-model="color" val="cyan" color="primary" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Serviço Online</q-item-label>
+            <q-item-label caption> Acesso a jogos multiplayer </q-item-label>
+          </q-item-section>
+
+          <q-item-section class="price"> 11$ </q-item-section>
+        </q-item>
+
+        <q-item class="item" tag="label" v-ripple>
+          <q-item-section avatar top>
+            <q-checkbox v-model="color" val="cyan" color="primary" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Armazenamento Extra</q-item-label>
+            <q-item-label caption>
+              Armazenamento extra de 1TB na nuvem
+            </q-item-label>
+          </q-item-section>
+
+          <q-item-section class="price"> 11$ </q-item-section>
+        </q-item>
+
+        <q-item class="item" tag="label" v-ripple>
+          <q-item-section avatar top>
+            <q-checkbox v-model="color" val="cyan" color="primary" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Perfil Customizável</q-item-label>
+            <q-item-label caption>
+              Temas customizados para seu perfil
+            </q-item-label>
+          </q-item-section>
+
+          <q-item-section class="price"> 11$ </q-item-section>
+        </q-item>
+      </q-list>
+    </div>
+  </section>
+
+  <section class="flex justify-between" style="margin-top: 4.4em">
+    <q-btn
+      @click="back"
+      color="transparent"
+      text-color="primary"
+      label="Voltar"
+    />
+    <q-btn @click="next" color="primary" label="Próximo" />
+  </section>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const color = ref("red");
+
+function next() {
+  router.push("/resumo");
+}
+
+function back() {
+  router.push("/plano");
+}
+</script>
+
+<style scoped>
+.item {
+  padding: 1em;
+  border: 0.1em solid hsl(213, 96%, 18%);
+  border-radius: 10px;
+  margin-top: 2em;
+  width: 100%;
+}
+
+.price {
+  align-items: end;
+  margin-right: 1em;
+}
+</style>
