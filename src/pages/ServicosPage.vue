@@ -9,7 +9,7 @@
       <q-list>
         <q-item class="item" tag="label" v-ripple>
           <q-item-section avatar top>
-            <q-checkbox v-model="color" val="cyan" color="primary" />
+            <q-checkbox v-model="online" val="online" color="primary" />
           </q-item-section>
 
           <q-item-section>
@@ -17,12 +17,16 @@
             <q-item-label caption> Acesso a jogos multiplayer </q-item-label>
           </q-item-section>
 
-          <q-item-section class="price"> 11$ </q-item-section>
+          <q-item-section class="price"> {{ onlinePrice }} </q-item-section>
         </q-item>
 
         <q-item class="item" tag="label" v-ripple>
           <q-item-section avatar top>
-            <q-checkbox v-model="color" val="cyan" color="primary" />
+            <q-checkbox
+              v-model="armazenamento"
+              val="armazenamento"
+              color="primary"
+            />
           </q-item-section>
 
           <q-item-section>
@@ -32,12 +36,14 @@
             </q-item-label>
           </q-item-section>
 
-          <q-item-section class="price"> 11$ </q-item-section>
+          <q-item-section class="price">
+            {{ armazenamentoPrice }}
+          </q-item-section>
         </q-item>
 
         <q-item class="item" tag="label" v-ripple>
           <q-item-section avatar top>
-            <q-checkbox v-model="color" val="cyan" color="primary" />
+            <q-checkbox v-model="custom" val="custom" color="primary" />
           </q-item-section>
 
           <q-item-section>
@@ -47,7 +53,7 @@
             </q-item-label>
           </q-item-section>
 
-          <q-item-section class="price"> 11$ </q-item-section>
+          <q-item-section class="price"> {{ customPrice }} </q-item-section>
         </q-item>
       </q-list>
     </div>
@@ -69,10 +75,43 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const color = ref("red");
+
+const online = ref(false);
+const armazenamento = ref(false);
+const custom = ref(false);
+
+let onlinePrice = ref("");
+let armazenamentoPrice = ref("");
+let customPrice = ref("");
+
+const servicos = [];
+
+const planoTipo = sessionStorage.getItem("planoTipo");
+
+if (planoTipo === "Mensal") {
+  onlinePrice = "+ R$1/Mês";
+  armazenamentoPrice = "+ R$2/Mês";
+  customPrice = "$2/Mês";
+} else {
+  onlinePrice = "+ R$10/Ano";
+  armazenamentoPrice = "+ R$20/Ano";
+  customPrice = "+ R$20/Ano";
+}
 
 function next() {
   router.push("/resumo");
+
+  if (online.value === true) {
+    servicos.push("online");
+  }
+  if (armazenamento.value === true) {
+    servicos.push("armazenamento");
+  }
+  if (custom.value === true) {
+    servicos.push("custom");
+  }
+
+  sessionStorage.setItem("servicos", servicos);
 }
 
 function back() {

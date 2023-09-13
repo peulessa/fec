@@ -13,7 +13,7 @@
         class="plan-card"
         clickable
         v-ripple
-        @click="choicePlan('arcade')"
+        @click="choicePlan('Arcade')"
       >
         <q-item-section>
           <img
@@ -33,7 +33,7 @@
         class="plan-card"
         clickable
         v-ripple
-        @click="choicePlan('advanced')"
+        @click="choicePlan('Advanced')"
       >
         <q-item-section>
           <img
@@ -53,7 +53,7 @@
         class="plan-card"
         clickable
         v-ripple
-        @click="choicePlan('pro')"
+        @click="choicePlan('Pro')"
       >
         <q-item-section>
           <img src="../assets/images/icon-pro.svg" alt="ícone do Plano Pro" />
@@ -99,8 +99,8 @@ import { useRouter } from "vue-router";
 const value = ref(false);
 const router = useRouter();
 let arcadePrice = ref("");
-let advancedPrice = ref();
-let proPrice = ref();
+let advancedPrice = ref("");
+let proPrice = ref("");
 
 function choicePlan(plan) {
   sessionStorage.setItem("plano", plan);
@@ -112,13 +112,13 @@ function choicePlanType() {
     advancedPrice.value = "R$120/Ano";
     proPrice.value = "R$150/Ano";
 
-    sessionStorage.setItem("planoTipo", "anual");
+    sessionStorage.setItem("planoTipo", "Anual");
   } else {
     arcadePrice.value = "R$10/Mês";
     advancedPrice.value = "R$12/Mês";
     proPrice.value = "R$15/Mês";
 
-    sessionStorage.setItem("planoTipo", "mensal");
+    sessionStorage.setItem("planoTipo", "Mensal");
   }
 }
 choicePlanType();
