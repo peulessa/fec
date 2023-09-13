@@ -8,7 +8,13 @@
 
   <section>
     <q-list class="flex justify-around">
-      <q-item class="plan-card" clickable v-ripple>
+      <q-item
+        id="arcade"
+        class="plan-card"
+        clickable
+        v-ripple
+        @click="choicePlan('arcade')"
+      >
         <q-item-section>
           <img
             src="../assets/images/icon-arcade.svg"
@@ -22,7 +28,13 @@
         <q-item-label caption>{{ arcadePrice }}</q-item-label>
       </q-item>
 
-      <q-item class="plan-card" clickable v-ripple>
+      <q-item
+        id="advanced"
+        class="plan-card"
+        clickable
+        v-ripple
+        @click="choicePlan('advanced')"
+      >
         <q-item-section>
           <img
             src="../assets/images/icon-advanced.svg"
@@ -36,7 +48,13 @@
         <q-item-label caption>{{ advancedPrice }}</q-item-label>
       </q-item>
 
-      <q-item class="plan-card" clickable v-ripple>
+      <q-item
+        id="pro"
+        class="plan-card"
+        clickable
+        v-ripple
+        @click="choicePlan('pro')"
+      >
         <q-item-section>
           <img src="../assets/images/icon-pro.svg" alt="ícone do Plano Pro" />
         </q-item-section>
@@ -57,7 +75,7 @@
         color="primary"
         keep-color
         size="lg"
-        @update:model-value="choicePlan"
+        @update:model-value="choicePlanType"
       />
       <strong>Anual</strong>
     </div>
@@ -84,22 +102,26 @@ let arcadePrice = ref("");
 let advancedPrice = ref();
 let proPrice = ref();
 
-function choicePlan() {
+function choicePlan(plan) {
+  sessionStorage.setItem("plano", plan);
+}
+
+function choicePlanType() {
   if (value.value === true) {
     arcadePrice.value = "R$100/Ano";
     advancedPrice.value = "R$120/Ano";
     proPrice.value = "R$150/Ano";
 
-    storage.setItem(plan, "anual");
+    sessionStorage.setItem("planoTipo", "anual");
   } else {
     arcadePrice.value = "R$10/Mês";
     advancedPrice.value = "R$12/Mês";
     proPrice.value = "R$15/Mês";
 
-    storage.setItem(plan, "mensal");
+    sessionStorage.setItem("planoTipo", "mensal");
   }
 }
-choicePlan();
+choicePlanType();
 
 function next() {
   router.push("/servicos");
