@@ -1,41 +1,51 @@
 <template>
-  <section class="q-pb-md">
-    <h4 class="q-ma-none q-pb-md">Finalizando</h4>
-    <p style="font-weight: 250">
-      Confira se selecionou corretamente seu plano e finalize seu pedido.
-    </p>
-  </section>
+  <q-card dark bordered class="bg-grey-2 my-card" style="color: black">
+    <q-card-section class="flex justify-between">
+      <div>
+        <strong>{{ plano }} ({{ tipo }})</strong>
+      </div>
+      <div>
+        <strong>{{ preco }}</strong>
+      </div>
+    </q-card-section>
 
-  <section>
-    <div>
-      <strong>{{ plano }}({{ tipo }})</strong>
-      <strong>{{ preco }}</strong>
-    </div>
-  </section>
+    <q-separator inset />
+
+    <q-card-section>
+      <ul class="q-ma-none q-pa-none">
+        <li
+          v-for="servico in servicos"
+          class="q-pb-sm text-weight-thin flex justify-between"
+          style="list-style: none"
+        >
+          <div>
+            {{ servico }}
+          </div>
+        </li>
+      </ul>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script setup>
+import { ref } from "vue";
+
 const plano = sessionStorage.getItem("plano");
 const tipo = sessionStorage.getItem("planoTipo");
-const servicos = sessionStorage.getItem("servicos");
+const servicosUnformated = sessionStorage.getItem("servicos");
+const servicos = servicosUnformated.split(",");
 
-const preco = "";
+console.log(servicos);
 
-if (plano === "Tipo") {
+let preco = ref("");
+
+if (tipo === "Anual") {
   if (plano === "Arcade") {
     preco = "R$10/Mês";
   } else if (plano === "Advanced") {
-    preco === "R$12/Mês";
+    preco = "R$12/Mês";
   } else {
-    preco === "R$ 15/Mês";
-  }
-} else {
-  if (plano === "Arcade") {
-    preco = "R$100/Ano";
-  } else if (plano === "Advanced") {
-    preco === "R$120/Ano";
-  } else {
-    preco === "R$ 150/Ano";
+    preco = "R$15/Mês";
   }
 }
 </script>

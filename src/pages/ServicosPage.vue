@@ -102,13 +102,13 @@ function next() {
   router.push("/resumo");
 
   if (online.value === true) {
-    servicos.push("online");
+    servicos.push("Online");
   }
   if (armazenamento.value === true) {
-    servicos.push("armazenamento");
+    servicos.push("Armazenamento");
   }
   if (custom.value === true) {
-    servicos.push("custom");
+    servicos.push("Custom");
   }
 
   sessionStorage.setItem("servicos", servicos);
