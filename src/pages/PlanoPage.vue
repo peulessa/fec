@@ -11,6 +11,7 @@
       <q-item
         id="arcade"
         class="plan-card"
+        :class="{ selected: selectedPlan === 'Arcade' }"
         clickable
         v-ripple
         @click="choicePlan('Arcade')"
@@ -31,6 +32,7 @@
       <q-item
         id="advanced"
         class="plan-card"
+        :class="{ selected: selectedPlan === 'Advanced' }"
         clickable
         v-ripple
         @click="choicePlan('Advanced')"
@@ -51,6 +53,7 @@
       <q-item
         id="pro"
         class="plan-card"
+        :class="{ selected: selectedPlan === 'Pro' }"
         clickable
         v-ripple
         @click="choicePlan('Pro')"
@@ -96,6 +99,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
+const selectedPlan = ref("");
 const value = ref(false);
 const router = useRouter();
 let arcadePrice = ref("");
@@ -103,6 +107,7 @@ let advancedPrice = ref("");
 let proPrice = ref("");
 
 function choicePlan(plan) {
+  selectedPlan.value = plan;
   sessionStorage.setItem("plano", plan);
 }
 
@@ -133,6 +138,10 @@ function back() {
 </script>
 
 <style scoped>
+.selected {
+  background-color: rgb(199, 199, 199);
+}
+
 .plan-card {
   border: 1px solid grey;
   border-radius: 10px;
