@@ -13,7 +13,7 @@
       label="Ex. Stephen King *"
       hint="Nome e Sobrenome"
       lazy-rules
-      :rules="[(val) => (val && val.length > 0) || 'Porfavor, digite seu nome']"
+      :rules="[(val) => (val && val.length > 0) || 'Porfavor, digite seu nom']"
     />
 
     <q-input
